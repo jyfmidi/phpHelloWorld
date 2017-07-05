@@ -1,29 +1,29 @@
-<?php  
-	require_once "utilities.php";
 
-	$sql = "SELECT * FROM `contacts`";   
-	require('db_conn.php');      
-?>  
+<?php
+require_once "utilities.php";
 
+$name = $_POST['name'];  
 
+$sql = "SELECT * FROM `addressBook`.`contacts` 
+WHERE `Name`='$name';";
+
+require('db_conn.php');
+
+?>
 <form id="form1" name="form1" method="post" action="search.php">  
   <table width="500" height="100" align="left" >  
     <tr>  
-      <td width="300">Search by name: </td>  
-      <td width="307"><label>  
-        <input name="name" type="text" id="name" />  
-      </label></td>  
-      <td>
-          <input type="submit" name="Submit3" value="Search" />  
-      </td>
-      <td>
-          <input type="reset" name="Submit2" value="Reset" />  
-      </td>
-    </tr>  
+      <td width="300">Search result: </td>  
+     </tr>  
   </table>  
 </form>
 
+<?php
 
+if($result)  
+{  
+
+?>  
 <table width="100%" border="1">  
     <tr>  
         <th bgcolor="#CCCCCC" scope="col">Name</th>  
@@ -33,8 +33,7 @@
     </tr>
 
 <?php  
-while($row = MySQL_fetch_row($result)) 
-{  
+	$row = MySQL_fetch_row($result);
     if($row[2]==0)  
     {  
         $sex = 'Male';  
@@ -59,10 +58,10 @@ while($row = MySQL_fetch_row($result))
         	[<a href= <?php echo $editRef ?>>Edit</a>]
         </td>
       </tr>  
-<?php  
-}  
-?>  
+<?php
+}
+?>
 </table>  
 <div align="right">  
-    [<a href="add.php" mce_href="add.php">Add new</a>]  
+    [<a href="index.php" mce_href="index.php">Return</a>]  
 </div>  
